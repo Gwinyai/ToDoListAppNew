@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="80" id="Ax5-Xr-Fia" customClass="TaskTableViewCell" customModule="ToDoListAppNew" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskTableViewCell" rowHeight="80" id="Ax5-Xr-Fia" customClass="TaskTableViewCell" customModule="ToDoListAppNew" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ax5-Xr-Fia" id="nww-vx-lGP">
@@ -75,6 +75,9 @@
                             <constraint firstItem="ICN-wb-xRG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="zpd-tc-pCD"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="ICN-wb-xRG" id="N3B-Zf-5J9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
