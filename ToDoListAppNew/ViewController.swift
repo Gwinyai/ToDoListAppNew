@@ -78,11 +78,11 @@ extension ViewController: ViewControllerDelegate {
 
 //MARK: - The datasource for our tasks
 extension ViewController: UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasks.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let task = tasks[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskTableViewCell", for: indexPath) as! TaskTableViewCell
@@ -98,21 +98,30 @@ extension ViewController: UITableViewDataSource {
         return cell
     }
     
+    //IndexPath IndexPath.section = 0 IndexPath.row = 0
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            tasks.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+
 }
 
 //MARK: - Change row height
 extension ViewController: UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
-    
+
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let taskSelected = tasks[indexPath.row]
 //        taskSelected.toggleIsComplete()
 //        tableView.reloadData()
 //    }
-    
+
 }
 
 
