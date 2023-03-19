@@ -37,12 +37,22 @@ protocol ViewControllerDelegate: AnyObject {
 class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    var selectedIndex: Int = 0
     
     var tasks: [Task] = []
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! AddTaskViewController
-        destinationVC.delegate = self
+        
+        if segue.identifier == "CreateTaskSegue" {
+            let destinationVC = segue.destination as! AddTaskViewController
+            destinationVC.delegate = self
+        }
+        else if segue.identifier == "TaskDetailSegue" {
+            let destinationVC = segue.destination as! TaskDetailViewController
+            let selectedTask = sender as! Task
+            destinationVC.task = selectedTask
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -116,11 +126,10 @@ extension ViewController: UITableViewDelegate {
         return 80
     }
 
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let taskSelected = tasks[indexPath.row]
-//        taskSelected.toggleIsComplete()
-//        tableView.reloadData()
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let taskSelected = tasks[indexPath.row]
+        performSegue(withIdentifier: "TaskDetailSegue", sender: taskSelected)
+    }
 
 }
 
