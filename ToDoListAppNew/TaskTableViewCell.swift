@@ -16,6 +16,7 @@ class TaskTableViewCell: UITableViewCell {
     var index = 0
     
     @IBAction func checkmarkButtonTapped(_ sender: Any) {
+        
         delegate?.toggleIsComplete(forIndex: index)
     }
     

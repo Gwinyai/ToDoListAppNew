@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="EmptyStateView" customModule="ToDoListAppNew" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="497" height="663"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HoH-73-9PJ" customClass="LottieAnimationView" customModule="Lottie">
+                    <rect key="frame" x="35" y="118" width="427" height="427"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="HoH-73-9PJ" secondAttribute="height" multiplier="1:1" id="QNl-KP-qcW"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the + to add a task" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QgT-RQ-4oT">
+                    <rect key="frame" x="25" y="570" width="447" height="19.333333333333371"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="HoH-73-9PJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="35" id="8rH-vz-mFh"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="HoH-73-9PJ" secondAttribute="trailing" constant="35" id="94I-W4-x1g"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="QgT-RQ-4oT" secondAttribute="trailing" constant="25" id="XFm-Ek-slL"/>
+                <constraint firstItem="HoH-73-9PJ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Y4H-BW-xD3"/>
+                <constraint firstItem="QgT-RQ-4oT" firstAttribute="top" secondItem="HoH-73-9PJ" secondAttribute="bottom" constant="25" id="azu-PB-3Jk"/>
+                <constraint firstItem="QgT-RQ-4oT" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="rLq-QU-hfb"/>
+                <constraint firstItem="HoH-73-9PJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="zvv-jb-KRs"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="animationView" destination="HoH-73-9PJ" id="lMb-TG-U9o"/>
+            </connections>
+            <point key="canvasLocation" x="216.03053435114504" y="-46.83098591549296"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

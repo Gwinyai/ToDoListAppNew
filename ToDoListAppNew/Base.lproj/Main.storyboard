@@ -65,6 +65,41 @@
                                             <outlet property="titleLabel" destination="VmY-sk-UuH" id="Exs-PX-Euq"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EmptyStateTableViewCell" rowHeight="545" id="Ele-yf-XjF" customClass="EmptyStateTableViewCell" customModule="ToDoListAppNew" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="130" width="393" height="545"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ele-yf-XjF" id="A22-E9-4U1">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="545"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2PG-gD-a7C" customClass="LottieAnimationView" customModule="Lottie">
+                                                    <rect key="frame" x="35" y="71" width="323" height="323"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="2PG-gD-a7C" secondAttribute="height" multiplier="1:1" id="Vo5-7B-Dlo"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap + to add your first task" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OeM-l1-dyN">
+                                                    <rect key="frame" x="25" y="414" width="343" height="19.333333333333314"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2PG-gD-a7C" firstAttribute="centerX" secondItem="A22-E9-4U1" secondAttribute="centerX" id="14Z-wT-KZE"/>
+                                                <constraint firstItem="2PG-gD-a7C" firstAttribute="leading" secondItem="A22-E9-4U1" secondAttribute="leading" constant="35" id="HEh-Ym-O7c"/>
+                                                <constraint firstItem="OeM-l1-dyN" firstAttribute="top" secondItem="2PG-gD-a7C" secondAttribute="bottom" constant="20" id="V0H-yN-hHw"/>
+                                                <constraint firstItem="OeM-l1-dyN" firstAttribute="leading" secondItem="A22-E9-4U1" secondAttribute="leading" constant="25" id="gRf-iq-4zW"/>
+                                                <constraint firstAttribute="trailing" secondItem="OeM-l1-dyN" secondAttribute="trailing" constant="25" id="joe-bh-Ck4"/>
+                                                <constraint firstItem="2PG-gD-a7C" firstAttribute="centerY" secondItem="A22-E9-4U1" secondAttribute="centerY" constant="-40" id="tNx-zb-5hA"/>
+                                                <constraint firstAttribute="trailing" secondItem="2PG-gD-a7C" secondAttribute="trailing" constant="35" id="uh2-Do-8eu"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="animationView" destination="2PG-gD-a7C" id="CUm-yR-F5y"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -77,13 +112,7 @@
                             <constraint firstItem="ICN-wb-xRG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="zpd-tc-pCD"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Tasks" id="rB2-Fh-Os1">
-                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="twq-uC-a7T">
-                            <connections>
-                                <action selector="addButtonTapped:" destination="BYZ-38-t0r" id="1BY-i7-7W3"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Tasks" largeTitleDisplayMode="always" id="rB2-Fh-Os1"/>
                     <connections>
                         <outlet property="tableView" destination="ICN-wb-xRG" id="N3B-Zf-5J9"/>
                         <segue destination="U5p-cg-3rc" kind="presentation" identifier="CreateTaskSegue" id="ayD-ni-LSQ"/>
@@ -174,11 +203,12 @@
                         <outlet property="descriptionLabel" destination="Mah-Eg-MvC" id="5rp-W6-5cD"/>
                         <outlet property="titleLabel" destination="8Y5-kP-gq4" id="deq-TM-AMs"/>
                         <outlet property="toggleTaskCompletionButton" destination="Yfw-Zz-i8d" id="pDo-6u-p29"/>
+                        <segue destination="U5p-cg-3rc" kind="presentation" identifier="EditTaskSegue" id="fld-US-pPP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HVn-8F-HPl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2017.5572519083969" y="350.7042253521127"/>
+            <point key="canvasLocation" x="2018" y="393"/>
         </scene>
         <!--Add Task View Controller-->
         <scene sceneID="UjW-Kh-dtY">
@@ -305,6 +335,7 @@
                         <outlet property="descriptionTextView" destination="2Zh-c2-L4B" id="wyp-ZU-CKT"/>
                         <outlet property="scrollView" destination="Tye-w5-t6r" id="IaY-Hi-p69"/>
                         <outlet property="submitButton" destination="Gi9-UO-bva" id="D7i-nn-pmA"/>
+                        <outlet property="titleLabel" destination="6Xp-3f-5Bl" id="7kv-sd-8Zg"/>
                         <outlet property="titleTextField" destination="HPI-u3-fY0" id="xRQ-Ov-Pgl"/>
                     </connections>
                 </viewController>
@@ -331,9 +362,11 @@
             <point key="canvasLocation" x="37" y="5"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="ayD-ni-LSQ"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="circle" catalog="system" width="128" height="123"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="trash" catalog="system" width="117" height="128"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
