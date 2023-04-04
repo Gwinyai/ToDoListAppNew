@@ -9,7 +9,24 @@ import UIKit
 
 // work gym hobby
 
+//implicit animations
 
+    //UIView.animate
+    //Property Animators
+
+//explicit animations
+
+    //CABasicAnimation
+    //CAKeyFrameAnimation
+
+
+//interpolation
+
+//duration
+
+//timimg function = linear, easeIn, easeOut, easeInOut
+
+//spring
 
 class AddTaskViewController: UIViewController {
     
@@ -17,8 +34,8 @@ class AddTaskViewController: UIViewController {
     @IBOutlet weak var categoryPickerView: UIPickerView!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var submitButton: UIButton!
-    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var modalView: UIView!
     weak var delegate: AddTaskDelegate?
     var task: Task?
     var index: Int?
@@ -29,7 +46,6 @@ class AddTaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.isScrollEnabled = false
         categoryPickerView.dataSource = self
         categoryPickerView.delegate = self
         if let task = task {
@@ -44,6 +60,32 @@ class AddTaskViewController: UIViewController {
                 categoryPickerView.selectRow(row, inComponent: 0, animated: false)
             }
         }
+        modalView.layer.cornerRadius = 6
+        titleTextField.layer.borderWidth = 0.5
+        titleTextField.layer.borderColor = UIColor.lightGray.cgColor
+        titleTextField.layer.cornerRadius = 6
+        descriptionTextView.layer.borderWidth = 0.5
+        descriptionTextView.layer.borderColor = UIColor.lightGray.cgColor
+        descriptionTextView.layer.cornerRadius = 6
+        submitButton.layer.cornerRadius = submitButton.frame.height / 2
+        
+        modalView.transform = CGAffineTransform(scaleX: 0, y: 0)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        UIView.animate(withDuration: 0.45, delay: 0) {
+//            self.modalView.transform = CGAffineTransform(scaleX: 1, y: 1)
+//        }
+        
+        UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 2, options: [.curveEaseOut]) {
+            self.modalView.transform = CGAffineTransform(scaleX: 1, y: 1)
+        } completion: { success in
+            
+        }
+
+        
     }
     
 
@@ -67,6 +109,11 @@ class AddTaskViewController: UIViewController {
     
         dismiss(animated: true)
     }
+    
+    @IBAction func dismissAddTask(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
     
 
 }

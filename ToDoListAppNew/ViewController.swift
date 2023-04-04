@@ -57,11 +57,18 @@ class ViewController: UIViewController {
         button.frame = CGRect(x: (viewWidth / 2) - (buttonWidth / 2), y: viewHeight - buttonHeight - 40, width: buttonWidth, height: buttonHeight)
         return button
     }()
-    
+    lazy var emptyStateView: EmptyStateView = {
+        let view = UINib(nibName: "EmptyStateView", bundle: nil).instantiate(withOwner: self)[0] as! EmptyStateView
+        return view
+    }()
     
     var selectedIndex: Int = 0
     
-    var tasks: [Task] = []
+    var tasks: [Task] = [] {
+        didSet {
+            emptyStateView.isHidden = tasks.count != 0
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -90,6 +97,19 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(deleteTaskFromNotification(_:)), name: NSNotification.Name("com.fullstacktuts.deleteTask"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateTaskFromNotification(_:)), name: NSNotification.Name("com.fullstacktuts.updateTask"), object: nil)
         view.addSubview(addTaskButton)
+        view.addSubview(emptyStateView)
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let topSafeAreaMargin = view.safeAreaInsets.top
+        let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
+        let bottomSafeAreaMargin = view.safeAreaInsets.bottom
+        let adjustmentForButton: CGFloat = 120
+        let emptyStateHeight = view.frame.height - topSafeAreaMargin - navigationBarHeight - bottomSafeAreaMargin - adjustmentForButton
+        let yPosEmptyStateView = topSafeAreaMargin + navigationBarHeight
+        emptyStateView.frame = CGRect(x: 0, y: yPosEmptyStateView, width: view.frame.width, height: emptyStateHeight)
     }
     
     @objc func updateTaskFromNotification(_ notification: Notification) {
@@ -112,8 +132,6 @@ class ViewController: UIViewController {
     @objc func refresh() {
         tableView.reloadData()
     }
-    
-    
     
     @objc func addButtonTapped() {
         performSegue(withIdentifier: "CreateTaskSegue", sender: nil)
@@ -151,26 +169,12 @@ extension ViewController: ViewControllerDelegate {
 
 //MARK: - The datasource for our tasks
 extension ViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            if tasks.count == 0 {
-                return 1
-            }
-            return 0
-        }
         return tasks.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "EmptyStateTableViewCell", for: indexPath)
-            return cell
-        } else {
             let task = tasks[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskTableViewCell", for: indexPath) as! TaskTableViewCell
             cell.titleLabel.text = task.title
@@ -183,8 +187,6 @@ extension ViewController: UITableViewDataSource {
                 cell.checkmarkButton.setImage(UIImage(systemName: "circle"), for: .normal)
             }
             return cell
-        }
-       
     }
     
     //IndexPath IndexPath.section = 0 IndexPath.row = 0
@@ -192,7 +194,7 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tasks.remove(at: indexPath.row)
-            tableView.deleteRows(at: [IndexPath(row: indexPath.row, section: 1)], with: .automatic)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
 
@@ -202,9 +204,6 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return tableView.frame.height
-        }
         return 80
     }
 

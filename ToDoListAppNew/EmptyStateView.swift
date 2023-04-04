@@ -12,7 +12,7 @@ class EmptyStateView: UIView {
     
     @IBOutlet weak var animationView: LottieAnimationView!
     
-    override class func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
         animationView.animation = LottieAnimation.named("taskman")
         animationView.loopMode = .loop
