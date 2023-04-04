@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 // work gym hobby
 
@@ -99,6 +100,20 @@ class AddTaskViewController: UIViewController {
         let selectedPickerviewRow = categoryPickerView.selectedRow(inComponent: 0)
         let selectedCategory = categories[selectedPickerviewRow]
         let newTask = Task(title: title, description: description, category: selectedCategory)
+        
+        /*
+         Saving task to Realm
+         */
+        
+        let realm = try! Realm()
+        let localTask = LocalTask()
+        localTask.taskTitle = title
+        localTask.taskDescription = description
+        localTask.category = selectedCategory.rawValue
+        
+        try! realm.write({
+            realm.add(localTask)
+        })
         
         if let _ = task,
             let index = index {

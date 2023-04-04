@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 //nibs
 //xibs
@@ -13,21 +14,7 @@ import UIKit
 
 //CRUD = Create Read Update and Delete
 
-class Task {
-    let title: String
-    let description: String
-    let category: Category
-    var isComplete: Bool
-    init(title: String, description: String, category: Category, isComplete: Bool = false) {
-        self.title = title
-        self.description = description
-        self.category = category
-        self.isComplete = isComplete
-    }
-    func toggleIsComplete() {
-        isComplete = !isComplete
-    }
-}
+
 
 protocol AddTaskDelegate: AnyObject {
     func add(task: Task)
@@ -99,6 +86,19 @@ class ViewController: UIViewController {
         view.addSubview(addTaskButton)
         view.addSubview(emptyStateView)
         
+        let realm = try! Realm()
+        let localTasks = realm.objects(LocalTask.self)
+        
+        for localTask in localTasks {
+            if let category = Category(rawValue: localTask.category) {
+                let task = Task(title: localTask.taskTitle, description: localTask.taskDescription, category: category)
+                tasks.append(task)
+            }
+        }
+        
+        if tasks.count > 0 {
+            tableView.reloadData()
+        }
     }
     
     override func viewDidLayoutSubviews() {
